@@ -1,0 +1,557 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&family=Ubuntu&display=swap');
+
+body {
+    background: #000;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+    font-family: 'Rubik', sans-serif;
+    color: azure;
+}
+
+.bg {
+    width: 100%;
+    height: 100vh;
+    background: #061640;
+    background-image: url(https://i.pinimg.com/originals/05/8c/5b/058c5b6bed01709ac18be83a27d271ca.gif);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    opacity: .9;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.container {
+    position: relative;
+    max-width: 100vh;
+    margin: auto
+    
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: .75rem;
+}
+
+.wrapper {
+    position: relative;
+    height: 50%;
+    max-width: 675px;
+    min-height: 400px;
+    margin: auto;
+    display: flex;
+    top: 65px
+}
+
+#gameTitle {
+    background: #e5a1c4;
+    background-size: cover;
+    filter: brightness(1.5) drop-shadow(-2px 2px 0 rgba(255, 255, 255, 1));
+    color: #b95087;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: cover;
+    background: -o-linear-gradient(transparent, transparent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: 4.9em;
+    text-align: center;
+    margin: 0;
+    /* padding: .5em; */
+    padding: 15px 50px 25px 50px;
+    mix-blend-mode: color-dodge;
+}
+
+#winMessage {
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 0 0 10px #fff;
+    font-size: 10em;
+    vertical-align: middle;
+    margin: auto;
+    position: relative;
+    padding: 0;
+    transition: .75s;
+    opacity: 0;
+    z-index: -1;
+    line-height: 1em;
+}
+
+#diamond_container {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 50px;
+}
+
+#diamonds {
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    height: 0;
+    padding: 50% 0;
+    text-align: center;
+    /* -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg); */
+    transform: rotate(45deg);
+}
+
+.diamond {
+    position: absolute;
+    width: 49%;
+    height: 49%;
+    transition: .5s;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.diamond .cover {
+    border-radius: inherit;
+    background-image: linear-gradient(#ccc, #fff);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    opacity: 0;
+    width: 100%;
+    box-sizing: content-box;
+    transition: opacity 0.45s;
+}
+
+.diamond:hover .cover {
+    opacity: 1;
+}
+
+.diamond.glowing .cover {
+    -webkit-animation: smoothFade 1s;
+    -moz-animation: smoothFade 1s;
+    animation: smoothFade 1s;
+}
+
+#white-diamond {
+    left: 0;
+    top: 0;
+    border: 2px solid #fff;
+    background: rgba(255, 255, 255, .71);
+    background: -webkit-radial-gradient(rgba(255, 255, 255, .38), rgba(255, 255, 255, .91));
+    background: radial-gradient(rgba(255, 255, 255, .38), rgba(255, 255, 255, .91));
+    box-sizing: border-box;
+    transition: .3s;
+}
+
+#white-diamond .cover {
+    background: #fff;
+    -moz-box-shadow: 2px 1px 45px -3px rgba(255, 255, 255, 1);
+    box-shadow: 2px 1px 45px -3px rgba(255, 255, 255, 1);
+    border: 2px solid #fff;
+}
+
+#yellow-diamond {
+    right: 0;
+    top: 0;
+    background: #ece273;
+    background: rgba(236, 226, 115, 71);
+    border: 2px solid #fff79f;
+    background: -webkit-radial-gradient(rgba(239, 232, 149, .4), rgba(233, 226, 147, .85));
+}
+
+#yellow-diamond .cover {
+    background: #fff79f;
+    border: 2px solid #fffde7;
+    background: -webkit-radial-gradient(rgb(255, 255, 255), rgb(255, 245, 135));
+    box-shadow: 2px 1px 45px -3px #fffcdc;
+}
+
+#blue-diamond {
+    left: 0;
+    bottom: 0;
+    background: #92edf0;
+    background: rgba(146, 237, 240, 71);
+    border: 2px solid #92edf0;
+    background: -webkit-radial-gradient(rgba(146, 237, 240, .33), rgba(146, 237, 240, .85));
+}
+
+#blue-diamond .cover {
+    background: #92edf0;
+    border: 2px solid #5efaff;
+    background: -webkit-radial-gradient(rgb(255, 255, 255), rgb(146, 237, 240));
+    box-shadow: 2px 1px 45px -3px rgb(198, 245, 247);
+}
+
+#pink-diamond {
+    right: 0;
+    bottom: 0;
+    border: 2px solid #ef82c5;
+    background: #ef82c5;
+    background: rgba(239, 130, 197, 71);
+    background: -webkit-radial-gradient(rgba(239, 130, 197, .33), rgba(239, 130, 197, .85));
+    background: radial-gradient(rgba(239, 130, 197, .33), rgba(239, 130, 197, .85));
+}
+
+#pink-diamond .cover {
+    background: #f9d4eb;
+    border: 2px solid #f9d4eb;
+    background: -webkit-radial-gradient(rgb(255, 255, 255), rgb(239, 130, 197));
+    box-shadow: 2px 1px 45px -3px rgb(239, 130, 197);
+}
+
+.controls {
+    padding: 1em 0;
+    text-align: center;
+    background: #6ab2bf;
+    background: -webkit-radial-gradient(rgba(0, 247, 255, 0), rgba(0, 247, 255, .42));
+    border: 1px solid #7bccd5;
+    box-sizing: border-box;
+    width: 180px;
+    font-size: .9rem;
+}
+
+.option {
+    text-align: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+    opacity: .25;
+    transition: .3s;
+    display: inline-flex;
+    margin: 0;
+    box-sizing: border-box;
+    width: 49%;
+    min-width: 60px;
+}
+
+.option:hover {
+    opacity: 1;
+}
+
+.option i {
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-size: 3em;
+    font-style: normal;
+}
+
+.controls h3 {
+    margin: 0 auto;
+}
+
+.option span {
+    text-align: center;
+    font-size: .8em;
+    display: block;
+    width: 100%;
+}
+
+
+.option.active,
+#rounds {
+    text-shadow: 0 0 10px #fff;
+    opacity: 1;
+}
+
+#replay.playMe {
+    opacity: 1;
+    -webkit-animation: miniGlow .75s ease-in-out infinite alternate;
+    -moz-animation: miniGlow .75s ease-in-out infinite alternate;
+    animation: miniGlow .75s ease-in-out infinite alternate;
+}
+
+#diamonds.winner .diamond {
+    animation: scaleOut .5s ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+}
+
+#diamonds.winner #blue-diamond {
+    animation-delay: 0.0s;
+}
+
+#diamonds.winner #white-diamond {
+    animation-delay: 0.5s;
+}
+
+#diamonds.winner #yellow-diamond {
+    animation-delay: 1.0s;
+}
+
+#diamonds.winner #pink-diamond {
+    animation-delay: 1.5s;
+}
+
+#winMessage.winner {
+    animation: fadeIn .5s ease-in-out;
+    -webkit-animation-delay: 2s;
+    -webkit-animation-fill-mode: forwards;
+    z-index: 2;
+}
+
+#diamonds.winner.outro .diamond {
+    opacity: 0;
+    transform: scale(0);
+    animation: scaleUp .5s ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+#diamonds.winner.outro #blue-diamond {
+    animation-delay: 0.5s;
+}
+
+#diamonds.winner.outro #white-diamond {
+    animation-delay: 1.0s;
+}
+
+#diamonds.winner.outro #yellow-diamond {
+    animation-delay: 1.5s;
+}
+
+#diamonds.winner.outro #pink-diamond {
+    animation-delay: 2.0s;
+}
+
+#winMessage.winner.outro {
+    animation: fadeOut .5s ease-in-out;
+    animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: initial;
+    animation-fill-mode: initial;
+}
+
+@media(max-width:750px) {
+    header {
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    #gameTitle {
+        flex-basis: 100%;
+        order: -1;
+        font-size: 4em;
+    }
+
+    .option {
+        flex-basis: 48%;
+        width: 48%;
+    }
+
+    .controls {
+        padding: .5em 0;
+        width: 150px;
+    }
+
+    .option i {
+        display: block;
+        font-size: 2em;
+    }
+}
+
+@media(min-aspect-ratio:2/1) and (max-width:750px) {
+    #gameTitle {
+        order: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 100vw;
+    }
+}
+
+@media(max-width:500px) {
+    #gameTitle {
+        padding: 0;
+        margin: 0 auto;
+        font-size: 3em;
+    }
+
+    .wrapper {
+        min-height: 300px;
+    }
+}
+
+@media(max-width:480px) {
+    #gameTitle {
+        padding: 20px 0;
+        margin: 0 auto;
+        font-size: 3rem;
+    }
+
+    .wrapper {
+        min-height: 300px;
+    }
+
+    .controls {
+        font-size: 1rem;
+    }
+  
+
+    #diamond_container{
+        width: 230px;
+    }
+}
+
+@media(max-height:500px) and (min-aspect-ratio:5/4) {
+    .container {
+        max-width: 100vw;
+    }
+
+    header {
+        justify-content: space-between;
+        margin: 0 20px;
+    }
+
+    .wrapper {
+        max-width: 400px;
+        min-height: 0;
+    }
+}
+
+@media(min-aspect-ratio:2/1) {
+    header {
+        flex-wrap: nowrap;
+        justify-content: space-around;
+    }
+
+    .container {
+        max-width: 75vw;
+    }
+}
+
+@media(min-width:1000px) and (min-aspect-ratio:5/4) {
+    header {
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .container {
+        max-width: 75vw;
+    }
+}
+
+@-webkit-keyframes smoothFade {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes smoothFade {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeOut {
+
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes scaleOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+@-webkit-keyframes scaleUp {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes miniGlow {
+    from {
+        text-shadow: 0 0 1px rgba(255, 255, 255, 0);
+    }
+
+    to {
+        text-shadow: 0 0 15px #fff;
+    }
+}
+
+/* firefox css */
+
+@-moz-document url-prefix() {
+  .wrapper {
+    top: 0;
+  }
+}

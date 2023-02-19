@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="favicon">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="bg"></div>
+    <main class="container">
+        <header>
+            <!-- Blue box for displaying the current round & play/replay button -->
+            <div class="controls">
+                <h3>ROUND</h3>
+                <div id="rounds" class="option"><i id="round">0</i> <span>/20</span></div>
+                <div id="replay" class="option playMe">
+                    <i id="playIcon">&#9658;</i> <span id="playMsg">PLAY?</span>
+                </div>
+            </div>
+
+            <h1 id="gameTitle">HIT THE <br> DIAMOND</h1>
+            <div class="controls">
+                <h3>MODE</h3>
+                <div id="strict" class="option">
+                    <i>&diams;</i> <span>STRICT</span>
+                </div>
+                <div id="forgiving" class="option active">
+                    <i>&starf;</i> <span>FORGIVING</span>
+                </div>
+            </div>
+        </header>
+        <div class="wrapper">
+            <h1 id="winMessage">YOU<br>WIN</h1>
+            <div id="diamond_container">
+      
+                <div id="diamonds">
+                    <div id="white-diamond" class="diamond">
+                        <div class="cover"></div>
+                    </div>
+                    <div id="yellow-diamond" class="diamond">
+                        <div class="cover"></div>
+                    </div>
+                    <div id="blue-diamond" class="diamond">
+                        <div class="cover"></div>
+                    </div>
+                    <div id="pink-diamond" class="diamond">
+                        <div class="cover"></div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
